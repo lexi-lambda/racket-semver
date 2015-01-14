@@ -336,7 +336,6 @@
 (module+ test
   (require typed/rackunit)
   (require typed/rackunit/text-ui)
-  (require typed/rackunit/docs-complete)
   
   (define tests
     (test-suite
