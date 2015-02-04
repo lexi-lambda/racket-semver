@@ -1,3 +1,3 @@
 #lang info
 
-(define scribblings '(("scribblings/main.scrbl")))
+(define scribblings '(("scribblings/semver.scrbl")))
