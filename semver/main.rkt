@@ -3,13 +3,13 @@
 (require racket/list
          racket/string
          racket/match
-         "comparisons.rkt")
+         typed/alexis/util/comparator)
 
 (provide
  semver-version? semver-comparator? semver-range?
- semver-version=? semver-version>? semver-version<? semver-version>=? semver-version<=?
  semver-version-within-range?
- semver-maximum-version-within-range)
+ semver-maximum-version-within-range
+ (comparison-predicates-out semver-version))
 
 (define semver-regex
   (pregexp
@@ -289,11 +289,14 @@
   (foldl semver-range-union (SemverRange '()) comparators))
 
 ; Generate semver-version comparison functions
-(generate-comparisons semver-version semver-version-compare
-                      #:type String #:adapter parse-semver-version)
+(define-comparison-predicates
+  semver-version : String
+  semver-version-compare
+  #:adapter parse-semver-version : SemverVersion)
 ; Generate internal semver-version comparison functions
-(generate-comparisons semver-version′ semver-version-compare
-                      #:type SemverVersion)
+(define-comparison-predicates
+  semver-version′ : SemverVersion
+  semver-version-compare)
 
 ; Checks if a version is within the constraints of a single comparator.
 (: semver-version-within-comparator? (SemverVersion SemverComparator -> Boolean))

@@ -9,7 +9,7 @@
 (define deps
   '("base"
     "typed-racket-lib"
-    "unstable-contract-lib"))
+    "alexis-util"))
 (define build-deps
   '("racket-doc"
     "scribble-lib"
